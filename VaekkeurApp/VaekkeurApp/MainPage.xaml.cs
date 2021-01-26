@@ -2,10 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+
 
 namespace VaekkeurApp
 {
@@ -20,9 +23,11 @@ namespace VaekkeurApp
         /// Checks if there is a match between device time and the given time in seconds
         /// </summary>
         /// <param name="alarmTimeInSeconds"></param>
-        /// <param name="alarmTone"></param>
+        /// <param name="alarmToneUrl"></param>
         /// <returns></returns>
-        public async Task CheckTimeForMatch(int alarmTimeInSeconds, string alarmToneUrl)
+
+        //public async Task CheckTimeForMatch(int alarmTimeInSeconds, string alarmToneUrl)
+        public void CheckTimeForMatch(int alarmTimeInSeconds, string alarmToneUrl)
         {
             // Device time now
             DateTime time = DateTime.Now;
@@ -37,8 +42,22 @@ namespace VaekkeurApp
             if (totalTimeInSeconds == alarmTimeInSeconds)
             {
                 // If match play a sound
-                await CrossMediaManager.Current.Play(alarmToneUrl);
+                //await CrossMediaManager.Current.Play(alarmToneUrl);
+
+                var stream = GetStreamFromFile("Battlefield.mp3");
+                var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                audio.Load(stream);
+                audio.Play();
             }
+        }
+
+        Stream GetStreamFromFile(string filename)
+        {
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+
+            var stream = assembly.GetManifestResourceStream("VaekkeurApp." + filename);
+
+            return stream;
         }
     }
 }
