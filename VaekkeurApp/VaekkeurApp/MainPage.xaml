@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VaekkeurApp.MainPage">
 
-    <StackLayout>
-        <Grid>
+    <StackLayout HorizontalOptions="Center">
+        <Grid x:Name="CreateAlarm">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Entry x:Name="_entry"
-             Placeholder="Enter event to be reminded of" />
+             Placeholder="Entere event to be reminded of" />
             <TimePicker Grid.Row="1" x:Name="TodayTime" Time="12:00:00"
                             Format="T"
                             PropertyChanged="OnTimePickerPropertyChanged"/>
@@ -25,16 +25,16 @@
                         Toggled="OnSwitchToggled"/>
             </StackLayout>
         </Grid>
-        <Frame>
-            <Button 
-                Text="+"
-                BackgroundColor="#000094"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                CornerRadius="40"
-                HeightRequest="58"
-                WidthRequest="58" />
-        </Frame>
+        <Button
+            Text="+"
+            TextColor="#FFFFFF"
+            FontSize="Large"
+            BackgroundColor="#000094"
+            HorizontalOptions="Center"
+            CornerRadius="30"
+            HeightRequest="60"
+            WidthRequest="60"
+            Clicked="CreateBtn"/>
         <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
         <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
     </StackLayout>

@@ -29,7 +29,15 @@ namespace VaekkeurApp
             return true;
         }
 
-
+        void CreateBtn(object sender, EventArgs args)
+        {
+            if (CreateAlarm.IsVisible == true)
+            {
+                CreateAlarm.IsVisible = false;
+            } else if (CreateAlarm.IsVisible == false) {
+                CreateAlarm.IsVisible = true;
+            }
+        }
         
 
         /// <summary>
