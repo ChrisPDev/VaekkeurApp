@@ -14,11 +14,24 @@ namespace VaekkeurApp
 {
     public partial class MainPage : ContentPage
     {
+        DateTime _triggerTime;
         public MainPage()
         {
             InitializeComponent();
+            Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
             CheckTimeForMatch(0, "SoundAssets/Battlefield.mp3");
         }
+
+        bool OnTimerTick()
+        {
+            if (_switch.IsToggled && DateTime.Now >= _triggerTime)
+            {
+                _switch.IsToggled = false;
+                DisplayAlert("Timer Alert", "The '" + _entry.Text + "' timer has elapsed", "OK");
+            }
+            return true;
+        }
+
 
         /// <summary>
         /// Checks if there is a match between device time and the given time in seconds
@@ -60,5 +73,33 @@ namespace VaekkeurApp
 
             return stream;
         }
+
+        void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "Time")
+            {
+                SetTriggerTime();
+            }
+        }
+        void OnSwitchToggled(object sender, ToggledEventArgs args)
+        {
+            SetTriggerTime();
+        }
+
+        void SetTriggerTime()
+        {
+            if (_switch.IsToggled)
+            {
+                _triggerTime = DateTime.Today + TodayTime.Time;
+                if(_triggerTime < DateTime.Now)
+                {
+                    _triggerTime += TimeSpan.FromDays(1);
+                }
+            }
+        }
+
+
+
+
     }
 }
