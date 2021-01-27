@@ -4,6 +4,27 @@
              x:Class="VaekkeurApp.MainPage">
 
     <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="_entry"
+             Placeholder="Enter event to be reminded of" />
+            <TimePicker Grid.Row="1" x:Name="TodayTime" Time="12:00:00"
+                            Format="T"
+                            PropertyChanged="OnTimePickerPropertyChanged"/>
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                <Label/>
+                <Switch x:Name="_switch"
+                        HorizontalOptions="EndAndExpand"
+                        Toggled="OnSwitchToggled"/>
+            </StackLayout>
+        </Grid>
         <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
         <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
     </StackLayout>
