@@ -17,8 +17,9 @@ namespace VaekkeurApp
         public MainPage()
         {
             InitializeComponent();
-            CheckTimeForMatch(0, "SoundAssets/Battlefield.mp3");
         }
+
+        
 
         /// <summary>
         /// Checks if there is a match between device time and the given time in seconds
@@ -40,7 +41,7 @@ namespace VaekkeurApp
             int totalTimeInSeconds = hoursInSeconds + minutesInSeconds + seconds;
 
             // Check if there is a match between device time and alarm time
-            if (totalTimeInSeconds == alarmTimeInSeconds)
+            if (totalTimeInSeconds >= alarmTimeInSeconds - 10 && totalTimeInSeconds <= alarmTimeInSeconds + 10)
             {
                 // If match play a sound
                 //await CrossMediaManager.Current.Play(alarmToneUrl);
@@ -59,6 +60,11 @@ namespace VaekkeurApp
             var stream = assembly.GetManifestResourceStream("VaekkeurApp." + filename);
 
             return stream;
+        }
+
+        private void TestButton_Clicked(object sender, EventArgs e)
+        {
+            CheckTimeForMatch(Int32.Parse(TestEntry.Text), "SoundAssets/Battlefield.mp3"); // Sat til at køre kl 15:00 i sekunder. Timer * 60 * 60 = Sekunder
         }
     }
 }

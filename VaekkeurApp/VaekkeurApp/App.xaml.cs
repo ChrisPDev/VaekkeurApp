@@ -10,7 +10,6 @@ namespace VaekkeurApp
         public App()
         {
             InitializeComponent();
-            CrossMediaManager.Current.Init();
 
             MainPage = new MainPage();
         }
