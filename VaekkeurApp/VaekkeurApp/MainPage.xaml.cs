@@ -1,5 +1,4 @@
-﻿using MediaManager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -18,8 +17,6 @@ namespace VaekkeurApp
         public MainPage()
         {
             InitializeComponent();
-            Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
-            CheckTimeForMatch(0, "SoundAssets/Battlefield.mp3");
         }
 
         bool OnTimerTick()
@@ -33,15 +30,16 @@ namespace VaekkeurApp
         }
 
 
+        
+
         /// <summary>
         /// Checks if there is a match between device time and the given time in seconds
         /// </summary>
         /// <param name="alarmTimeInSeconds"></param>
-        /// <param name="alarmToneUrl"></param>
+        /// <param name="alarmTone"></param>
         /// <returns></returns>
 
-        //public async Task CheckTimeForMatch(int alarmTimeInSeconds, string alarmToneUrl)
-        public void CheckTimeForMatch(int alarmTimeInSeconds, string alarmToneUrl)
+        public void CheckTimeForMatch(int alarmTimeInSeconds, string alarmTone)
         {
             // Device time now
             DateTime time = DateTime.Now;
@@ -53,12 +51,11 @@ namespace VaekkeurApp
             int totalTimeInSeconds = hoursInSeconds + minutesInSeconds + seconds;
 
             // Check if there is a match between device time and alarm time
-            if (totalTimeInSeconds == alarmTimeInSeconds)
+            if (totalTimeInSeconds >= alarmTimeInSeconds - 10 && totalTimeInSeconds <= alarmTimeInSeconds + 10)
             {
                 // If match play a sound
-                //await CrossMediaManager.Current.Play(alarmToneUrl);
 
-                var stream = GetStreamFromFile(alarmToneUrl);
+                var stream = GetStreamFromFile(alarmTone);
                 var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                 audio.Load(stream);
                 audio.Play();
@@ -101,5 +98,10 @@ namespace VaekkeurApp
 
 
 
+
+        private void TestButton_Clicked(object sender, EventArgs e)
+        {
+            CheckTimeForMatch(Int32.Parse(TestEntry.Text), "SoundAssets/Battlefield.mp3"); // Sat til at køre kl 15:00 i sekunder. Timer * 60 * 60 = Sekunder
+        }
     }
 }

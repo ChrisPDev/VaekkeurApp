@@ -35,6 +35,8 @@
                 HeightRequest="58"
                 WidthRequest="58" />
         </Frame>
+        <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
+        <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
     </StackLayout>
 
 </ContentPage>
