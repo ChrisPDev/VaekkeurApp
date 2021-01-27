@@ -19,6 +19,7 @@ namespace VaekkeurApp
         {
             InitializeComponent();
             Device.StartTimer(TimeSpan.FromSeconds(1), OnTimerTick);
+            CheckTimeForMatch(0, "SoundAssets/Battlefield.mp3");
         }
 
         bool OnTimerTick()
@@ -57,7 +58,7 @@ namespace VaekkeurApp
                 // If match play a sound
                 //await CrossMediaManager.Current.Play(alarmToneUrl);
 
-                var stream = GetStreamFromFile("Battlefield.mp3");
+                var stream = GetStreamFromFile(alarmToneUrl);
                 var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                 audio.Load(stream);
                 audio.Play();
