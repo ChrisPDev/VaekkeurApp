@@ -1,5 +1,4 @@
-﻿using MediaManager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -37,11 +36,10 @@ namespace VaekkeurApp
         /// Checks if there is a match between device time and the given time in seconds
         /// </summary>
         /// <param name="alarmTimeInSeconds"></param>
-        /// <param name="alarmToneUrl"></param>
+        /// <param name="alarmTone"></param>
         /// <returns></returns>
 
-        //public async Task CheckTimeForMatch(int alarmTimeInSeconds, string alarmToneUrl)
-        public void CheckTimeForMatch(int alarmTimeInSeconds, string alarmToneUrl)
+        public void CheckTimeForMatch(int alarmTimeInSeconds, string alarmTone)
         {
             // Device time now
             DateTime time = DateTime.Now;
@@ -56,9 +54,8 @@ namespace VaekkeurApp
             if (totalTimeInSeconds >= alarmTimeInSeconds - 10 && totalTimeInSeconds <= alarmTimeInSeconds + 10)
             {
                 // If match play a sound
-                //await CrossMediaManager.Current.Play(alarmToneUrl);
 
-                var stream = GetStreamFromFile(alarmToneUrl);
+                var stream = GetStreamFromFile(alarmTone);
                 var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                 audio.Load(stream);
                 audio.Play();
