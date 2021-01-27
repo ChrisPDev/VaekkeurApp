@@ -25,6 +25,16 @@
                         Toggled="OnSwitchToggled"/>
             </StackLayout>
         </Grid>
+        <Frame>
+            <Button 
+                Text="+"
+                BackgroundColor="#000094"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                CornerRadius="40"
+                HeightRequest="58"
+                WidthRequest="58" />
+        </Frame>
     </StackLayout>
 
 </ContentPage>
