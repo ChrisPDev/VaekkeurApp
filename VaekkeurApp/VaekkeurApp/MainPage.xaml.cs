@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediaManager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -16,7 +17,8 @@ namespace VaekkeurApp
         DateTime _triggerTime;
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            CrossMediaManager.Current.Dispose();
         }
 
         bool OnTimerTick()
@@ -27,10 +29,7 @@ namespace VaekkeurApp
                 DisplayAlert("Timer Alert", "The '" + _entry.Text + "' timer has elapsed", "OK");
             }
             return true;
-        }
-
-
-        
+        }        
 
         /// <summary>
         /// Checks if there is a match between device time and the given time in seconds
@@ -39,7 +38,7 @@ namespace VaekkeurApp
         /// <param name="alarmTone"></param>
         /// <returns></returns>
 
-        public void CheckTimeForMatch(int alarmTimeInSeconds, string alarmTone)
+        public async void CheckTimeForMatch(int alarmTimeInSeconds, string alarmTone)
         {
             // Device time now
             DateTime time = DateTime.Now;
@@ -51,24 +50,12 @@ namespace VaekkeurApp
             int totalTimeInSeconds = hoursInSeconds + minutesInSeconds + seconds;
 
             // Check if there is a match between device time and alarm time
-            if (totalTimeInSeconds >= alarmTimeInSeconds - 10 && totalTimeInSeconds <= alarmTimeInSeconds + 10)
+            if (totalTimeInSeconds >= alarmTimeInSeconds - 5 && totalTimeInSeconds <= alarmTimeInSeconds + 5)
             {
+                CrossMediaManager.Current.Init();
                 // If match play a sound
-
-                var stream = GetStreamFromFile(alarmTone);
-                var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-                audio.Load(stream);
-                audio.Play();
+                await CrossMediaManager.Current.PlayFromResource(alarmTone);
             }
-        }
-
-        Stream GetStreamFromFile(string filename)
-        {
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-
-            var stream = assembly.GetManifestResourceStream("VaekkeurApp." + filename);
-
-            return stream;
         }
 
         void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -94,14 +81,9 @@ namespace VaekkeurApp
                 }
             }
         }
-
-
-
-
-
         private void TestButton_Clicked(object sender, EventArgs e)
         {
-            CheckTimeForMatch(Int32.Parse(TestEntry.Text), "SoundAssets/Battlefield.mp3"); // Sat til at køre kl 15:00 i sekunder. Timer * 60 * 60 = Sekunder
+            CheckTimeForMatch(Int32.Parse(TestEntry.Text), "asset:///Battlefield.mp3"); // Sat til at køre kl 15:00 i sekunder. Timer * 60 * 60 = Sekunder
         }
     }
 }

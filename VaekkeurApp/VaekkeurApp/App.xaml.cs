@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediaManager;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +10,7 @@ namespace VaekkeurApp
         public App()
         {
             InitializeComponent();
+            CrossMediaManager.Current.Init();
 
             MainPage = new MainPage();
         }
