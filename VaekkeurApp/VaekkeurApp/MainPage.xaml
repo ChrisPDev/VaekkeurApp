@@ -4,7 +4,7 @@
              x:Class="VaekkeurApp.MainPage">
 
     <StackLayout Background="#455357">
-        <Grid>
+        <Grid x:Name="CreateAlarm">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
