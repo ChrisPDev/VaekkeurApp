@@ -31,6 +31,17 @@ namespace VaekkeurApp
             return true;
         }        
 
+        void CreateBtn(object sender, EventArgs args)
+        {
+            if (CreateAlarm.IsVisible == true)
+            {
+                CreateAlarm.IsVisible = false;
+            } else if (CreateAlarm.IsVisible == false) {
+                CreateAlarm.IsVisible = true;
+            }
+        }
+        
+
         /// <summary>
         /// Checks if there is a match between device time and the given time in seconds
         /// </summary>
