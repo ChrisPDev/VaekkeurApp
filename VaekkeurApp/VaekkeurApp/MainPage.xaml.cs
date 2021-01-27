@@ -40,7 +40,7 @@ namespace VaekkeurApp
                 CreateAlarm.IsVisible = true;
             }
         }
-        
+
 
         /// <summary>
         /// Checks if there is a match between device time and the given time in seconds
