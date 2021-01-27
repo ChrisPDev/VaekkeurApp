@@ -4,21 +4,27 @@
              x:Class="VaekkeurApp.MainPage">
 
     <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="_entry"
+             Placeholder="Enter event to be reminded of" />
+            <TimePicker Grid.Row="1" x:Name="TodayTime" Time="12:00:00"
+                            Format="T"
+                            PropertyChanged="OnTimePickerPropertyChanged"/>
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                <Label/>
+                <Switch x:Name="_switch"
+                        HorizontalOptions="EndAndExpand"
+                        Toggled="OnSwitchToggled"/>
+            </StackLayout>
+        </Grid>
     </StackLayout>
 
 </ContentPage>
