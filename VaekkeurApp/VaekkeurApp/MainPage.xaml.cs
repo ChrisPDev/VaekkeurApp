@@ -46,10 +46,9 @@ namespace VaekkeurApp
         /// Checks if there is a match between device time and the given time in seconds
         /// </summary>
         /// <param name="alarmTimeInSeconds"></param>
-        /// <param name="alarmTone"></param>
         /// <returns></returns>
 
-        public async void CheckTimeForMatch(int alarmTimeInSeconds, string alarmTone)
+        public async void CheckTimeForMatch(int alarmTimeInSeconds)
         {
             // Device time now
             DateTime time = DateTime.Now;
@@ -65,7 +64,7 @@ namespace VaekkeurApp
             {
                 CrossMediaManager.Current.Init();
                 // If match play a sound
-                await CrossMediaManager.Current.PlayFromResource(alarmTone);
+                await CrossMediaManager.Current.PlayFromResource("asset:///Battlefield.mp3");
             }
         }
 
@@ -92,9 +91,9 @@ namespace VaekkeurApp
                 }
             }
         }
-        private void TestButton_Clicked(object sender, EventArgs e)
-        {
-            CheckTimeForMatch(Int32.Parse(TestEntry.Text), "asset:///Battlefield.mp3"); // Sat til at køre kl 15:00 i sekunder. Timer * 60 * 60 = Sekunder
-        }
+        //private void TestButton_Clicked(object sender, EventArgs e)
+        //{
+        //    CheckTimeForMatch(Int32.Parse(TestEntry.Text), "asset:///Battlefield.mp3"); // Sat til at køre kl 15:00 i sekunder. Timer * 60 * 60 = Sekunder
+        //}
     }
 }

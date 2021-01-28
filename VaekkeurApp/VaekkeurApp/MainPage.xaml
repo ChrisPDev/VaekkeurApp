@@ -3,31 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VaekkeurApp.MainPage">
 
-    <StackLayout Background="#455357">
-        <Grid x:Name="CreateAlarm">
+    <StackLayout 
+        Background="#455357">
+        
+        <!--<Entry 
+            x:Name="TestEntry" 
+            Placeholder="Klokkeslet i sekunder" />
+        
+        <Button 
+            x:Name="TestButton" 
+            Text="Sæt Alarm" 
+            Clicked="TestButton_Clicked" />-->
+        
+        <Grid
+            x:Name="CreateAlarm">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Entry x:Name="_entry"
-             Placeholder="Enter event to be reminded of" TextColor="#F3FCFF"/>
-            <TimePicker Grid.Row="1" x:Name="TodayTime" Time="12:00:00"
-                            Format="T"
-                            TextColor="#F3FCFF"
-                            PropertyChanged="OnTimePickerPropertyChanged"/>
-            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <Label/>
-                <Switch x:Name="_switch"
-                        OnColor="ForestGreen"
-                        ThumbColor="#8B9091"
-                        HorizontalOptions="EndAndExpand"
-                        Toggled="OnSwitchToggled"/>
+
+            <Entry 
+                x:Name="_entry"
+                Placeholder="Enter event to be reminded of"
+                TextColor="#F3FCFF"/>
+            
+            <TimePicker
+                Grid.Row="1"
+                x:Name="TodayTime"
+                Time="12:00:00"
+                Format="T"
+                TextColor="#F3FCFF"
+                PropertyChanged="OnTimePickerPropertyChanged"/>
+
+            <StackLayout
+                Orientation="Horizontal"
+                Grid.Row="1"
+                Grid.Column="1">
+
+                <Switch 
+                    x:Name="_switch"
+                    OnColor="ForestGreen"
+                    ThumbColor="#8B9091"
+                    HorizontalOptions="EndAndExpand"
+                    Toggled="OnSwitchToggled"/>
+                
             </StackLayout>
+            
         </Grid>
+        
         <Button
             Text="+"
             TextColor="#FFFFFF"
@@ -38,8 +67,7 @@
             HeightRequest="60"
             WidthRequest="60"
             Clicked="CreateBtn"/>
-        <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
-        <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
+        
     </StackLayout>
 
 </ContentPage>
