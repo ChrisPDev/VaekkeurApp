@@ -99,8 +99,10 @@
                     Clicked="SaveBtn"/>
         </StackLayout>
 
-        <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
-        <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
+        <Entry x:Name="TestEntry" Placeholder="HH:mm" />
+        <Button x:Name="TestSnooze" Text="Snooze Alarm" Clicked="TestSnooze_Clicked" />
+        <Button x:Name="TestStop" Text="Stop Alarm" Clicked="TestStop_Clicked" />
+        <Button x:Name="TestStart" Text="Sæt Alarm" Clicked="TestStart_Clicked" />
     </StackLayout>
 
 </ContentPage>

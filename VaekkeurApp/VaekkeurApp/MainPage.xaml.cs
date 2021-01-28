@@ -1,4 +1,6 @@
 ﻿using MediaManager;
+using MediaManager.Playback;
+using MediaManager.Player;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +27,7 @@ namespace VaekkeurApp
             InitializeComponent();
             CrossMediaManager.Current.Dispose();
             AlarmList.ItemsSource = Alarms;
+
         }
 
         bool OnTimerTick()
@@ -70,29 +73,15 @@ namespace VaekkeurApp
             }
         }
 
-
-        /// <summary>
-        /// Checks if there is a match between device time and the given time in seconds
-        /// </summary>
-        /// <param name="alarmTimeInSeconds"></param>
-        /// <returns></returns>
-
-        public async void CheckTimeForMatch(int alarmTimeInSeconds)
+        public async void CheckTimeForMatch(string alarmTime)
         {
-            // Device time now
-            DateTime time = DateTime.Now;
+            DateTime timeNow = DateTime.Now;
+            string timeNowFormatted = timeNow.ToString("HH:mm");
 
-            // Recalculating device time into total seconds
-            int hoursInSeconds = time.Hour * 60 * 60;
-            int minutesInSeconds = time.Minute * 60;
-            int seconds = time.Second;
-            int totalTimeInSeconds = hoursInSeconds + minutesInSeconds + seconds;
-
-            // Check if there is a match between device time and alarm time
-            if (totalTimeInSeconds >= alarmTimeInSeconds - 5 && totalTimeInSeconds <= alarmTimeInSeconds + 5)
+            if (timeNowFormatted == alarmTime)
             {
                 CrossMediaManager.Current.Init();
-                // If match play a sound
+                CrossMediaManager.Current.RepeatMode = RepeatMode.All;
                 await CrossMediaManager.Current.PlayFromResource("asset:///Battlefield.mp3");
             }
         }
@@ -120,9 +109,35 @@ namespace VaekkeurApp
                 }
             }
         }
-        //private void TestButton_Clicked(object sender, EventArgs e)
-        //{
-        //    CheckTimeForMatch(Int32.Parse(TestEntry.Text), "asset:///Battlefield.mp3"); // Sat til at køre kl 15:00 i sekunder. Timer * 60 * 60 = Sekunder
-        //}
+        private void TestStart_Clicked(object sender, EventArgs e)
+        {
+            CheckTimeForMatch(TestEntry.Text);
+        }
+        private void TestStop_Clicked(object sender, EventArgs e)
+        {
+            MediaPlayerState state = CrossMediaManager.Current.State;
+            if (state == MediaPlayerState.Playing)
+            {
+                CrossMediaManager.Current.Stop();
+            }
+        }
+        private void TestSnooze_Clicked(object sender, EventArgs e)
+        {
+            MediaPlayerState state = CrossMediaManager.Current.State;
+            if (state == MediaPlayerState.Playing)
+            {
+                CrossMediaManager.Current.Stop();
+                CrossMediaManager.Current.Dispose();
+
+                Device.StartTimer(TimeSpan.FromSeconds(300), () =>
+                {
+                    CrossMediaManager.Current.Init();
+                    CrossMediaManager.Current.RepeatMode = RepeatMode.All;
+                    CrossMediaManager.Current.PlayFromResource("asset:///Battlefield.mp3");
+
+                    return false;
+                });
+            }
+        }
     }
 }
