@@ -1,23 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:VaekkeurApp.Model"
              x:Class="VaekkeurApp.MainPage">
-
-    <StackLayout 
-        Background="#455357">
-        
-        <!--<Entry 
-            x:Name="TestEntry" 
-            Placeholder="Klokkeslet i sekunder" />
-        
-        <Button 
-            x:Name="TestButton" 
-            Text="Sæt Alarm" 
-            Clicked="TestButton_Clicked" />-->
-        
-        <Grid
-            x:Name="CreateAlarm">
-            
+    
+    <StackLayout Background="#455357">
+        <ListView x:Name="AlarmList" ItemTapped="OnItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="alarmTitle"
+                                       Text="{Binding Title}"
+                                            TextColor="#F3FCFF"/>
+                                    <Label Grid.Row="1" x:Name="alarmTime"
+                                       Text="{Binding Time}"
+                                            TextColor="#F3FCFF"/>
+                                    <Switch Grid.Row="1" Grid.Column="1" x:Name="_switch"
+                                     OnColor="ForestGreen"
+                                     ThumbColor="#8B9091"
+                                     HorizontalOptions="EndAndExpand"
+                                     Toggled="OnSwitchToggled"/>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid x:Name="CreateAlarm" IsVisible="false">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -56,18 +76,31 @@
             </StackLayout>
             
         </Grid>
-        
-        <Button
-            Text="+"
-            TextColor="#FFFFFF"
-            FontSize="Large"
-            BackgroundColor="#000094"
-            HorizontalOptions="Center"
-            CornerRadius="30"
-            HeightRequest="60"
-            WidthRequest="60"
-            Clicked="CreateBtn"/>
-        
+        <StackLayout VerticalOptions="End">
+            <Button x:Name="_create"
+                Text="+"
+                TextColor="#FFFFFF"
+                FontSize="Large"
+                BackgroundColor="#000094"
+                HorizontalOptions="Center"
+                CornerRadius="30"
+                HeightRequest="60"
+                WidthRequest="60"
+                Clicked="CreateBtn"/>
+            <Button x:Name="_save"
+                    Text="Create"
+                    TextColor="#FFFFFF"
+                    BackgroundColor="#000094"
+                    HorizontalOptions="Center"
+                    CornerRadius="30"
+                    HeightRequest="60"
+                    WidthRequest="60"
+                    IsVisible="false"
+                    Clicked="SaveBtn"/>
+        </StackLayout>
+
+        <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
+        <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
     </StackLayout>
 
 </ContentPage>

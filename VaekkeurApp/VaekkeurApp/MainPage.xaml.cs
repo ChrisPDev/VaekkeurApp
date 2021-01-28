@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VaekkeurApp.Model;
 using Xamarin.Forms;
 
 
@@ -14,11 +16,15 @@ namespace VaekkeurApp
 {
     public partial class MainPage : ContentPage
     {
+        private List<Alarm> Alarms;
         DateTime _triggerTime;
         public MainPage()
         {
-            InitializeComponent(); 
+            Alarms = new List<Alarm>();
+            PopulateList();
+            InitializeComponent();
             CrossMediaManager.Current.Dispose();
+            AlarmList.ItemsSource = Alarms;
         }
 
         bool OnTimerTick()
@@ -29,15 +35,38 @@ namespace VaekkeurApp
                 DisplayAlert("Timer Alert", "The '" + _entry.Text + "' timer has elapsed", "OK");
             }
             return true;
-        }        
+        }
 
+        private void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e == null) return; // has been set to null, do not 'process' tapped event
+            Debug.WriteLine("Tapped: " + e.Item);
+            ((ListView)sender).SelectedItem = null; // de-select the row
+        }
+
+        private void PopulateList()
+        {
+            Alarms.Add(new Alarm() { Title = "Morgen", Time = "06:00", Switch = false });
+            Alarms.Add(new Alarm() { Title = "Aften", Time = "18:00", Switch = false });
+            Alarms.Add(new Alarm() { Title = "Vigtigt Møde", Time = "12:00", Switch = false });
+        }
         void CreateBtn(object sender, EventArgs args)
+        {
+            if (CreateAlarm.IsVisible == false)
+            {
+                CreateAlarm.IsVisible = true;
+                _create.IsVisible = false;
+                _save.IsVisible = true;
+            }
+        }
+
+        void SaveBtn(object sender, EventArgs args)
         {
             if (CreateAlarm.IsVisible == true)
             {
                 CreateAlarm.IsVisible = false;
-            } else if (CreateAlarm.IsVisible == false) {
-                CreateAlarm.IsVisible = true;
+                _create.IsVisible = true;
+                _save.IsVisible = false;
             }
         }
 
