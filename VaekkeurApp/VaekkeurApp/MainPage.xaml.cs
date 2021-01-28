@@ -19,7 +19,6 @@ namespace VaekkeurApp
     public partial class MainPage : ContentPage
     {
         private List<Alarm> Alarms;
-        DateTime _triggerTime;
         public MainPage()
         {
             Alarms = new List<Alarm>();
@@ -28,16 +27,6 @@ namespace VaekkeurApp
             CrossMediaManager.Current.Dispose();
             AlarmList.ItemsSource = Alarms;
 
-        }
-
-        bool OnTimerTick()
-        {
-            if (_switch.IsToggled && DateTime.Now >= _triggerTime)
-            {
-                _switch.IsToggled = false;
-                DisplayAlert("Timer Alert", "The '" + _entry.Text + "' timer has elapsed", "OK");
-            }
-            return true;
         }
 
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
@@ -49,9 +38,9 @@ namespace VaekkeurApp
 
         private void PopulateList()
         {
-            Alarms.Add(new Alarm() { Title = "Morgen", Time = "06:00", Switch = false });
-            Alarms.Add(new Alarm() { Title = "Aften", Time = "18:00", Switch = false });
-            Alarms.Add(new Alarm() { Title = "Vigtigt Møde", Time = "12:00", Switch = false });
+            Alarms.Add(new Alarm() { Name = "Morgen", TimeOffset = DateTimeOffset.UtcNow, isActive = false });
+            Alarms.Add(new Alarm() { Name = "Aften", TimeOffset = DateTimeOffset.UtcNow, isActive = false });
+            Alarms.Add(new Alarm() { Name = "Vigtigt Møde", TimeOffset = DateTimeOffset.UtcNow, isActive = false });
         }
         void CreateBtn(object sender, EventArgs args)
         {
@@ -86,29 +75,6 @@ namespace VaekkeurApp
             }
         }
 
-        void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            if (args.PropertyName == "Time")
-            {
-                SetTriggerTime();
-            }
-        }
-        void OnSwitchToggled(object sender, ToggledEventArgs args)
-        {
-            SetTriggerTime();
-        }
-
-        void SetTriggerTime()
-        {
-            if (_switch.IsToggled)
-            {
-                _triggerTime = DateTime.Today + TodayTime.Time;
-                if(_triggerTime < DateTime.Now)
-                {
-                    _triggerTime += TimeSpan.FromDays(1);
-                }
-            }
-        }
         private void TestStart_Clicked(object sender, EventArgs e)
         {
             CheckTimeForMatch(TestEntry.Text);

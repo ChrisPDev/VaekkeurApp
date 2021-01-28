@@ -2,37 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:VaekkeurApp.Model"
              x:Class="VaekkeurApp.MainPage">
-    
+
     <StackLayout Background="#455357">
+
         <ListView x:Name="AlarmList" ItemTapped="OnItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <StackLayout>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label x:Name="alarmTitle"
-                                       Text="{Binding Title}"
-                                            TextColor="#F3FCFF"/>
-                                    <Label Grid.Row="1" x:Name="alarmTime"
-                                       Text="{Binding Time}"
-                                            TextColor="#F3FCFF"/>
-                                    <Switch Grid.Row="1" Grid.Column="1" x:Name="_switch"
-                                     OnColor="ForestGreen"
-                                     ThumbColor="#8B9091"
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label x:Name="alarmTitle" Text="{Binding Name}" TextColor="#F3FCFF"/>
+                                    <Label Grid.Row="1" x:Name="alarmTime" Text="{Binding TimeOffset}" TextColor="#F3FCFF"/>
+                                    <StackLayout>
+                                        <Switch Grid.Row="1" Grid.Column="1"
+                                     x:Name="ActiveSwitch"
+                                     IsToggled="{Binding IsActive}"
+                                     VerticalOptions="Center"
                                      HorizontalOptions="EndAndExpand"
-                                     Toggled="OnSwitchToggled"/>
-                                </Grid>
+                                     OnColor="ForestGreen"
+                                     ThumbColor="#8B9091"/>
+                                    </StackLayout>
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -58,8 +59,7 @@
                 x:Name="TodayTime"
                 Time="12:00:00"
                 Format="T"
-                TextColor="#F3FCFF"
-                PropertyChanged="OnTimePickerPropertyChanged"/>
+                TextColor="#F3FCFF"/>
 
             <StackLayout
                 Orientation="Horizontal"
@@ -70,9 +70,8 @@
                     x:Name="_switch"
                     OnColor="ForestGreen"
                     ThumbColor="#8B9091"
-                    HorizontalOptions="EndAndExpand"
-                    Toggled="OnSwitchToggled"/>
-                
+                    HorizontalOptions="EndAndExpand"/>
+
             </StackLayout>
             
         </Grid>
