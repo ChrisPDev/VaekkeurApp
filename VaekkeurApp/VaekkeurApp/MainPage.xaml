@@ -4,7 +4,7 @@
              x:Class="VaekkeurApp.MainPage">
 
     <StackLayout Background="#455357">
-        <Grid x:Name="CreateAlarm">
+        <Grid x:Name="CreateAlarm" IsVisible="false">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -28,16 +28,29 @@
                         Toggled="OnSwitchToggled"/>
             </StackLayout>
         </Grid>
-        <Button
-            Text="+"
-            TextColor="#FFFFFF"
-            FontSize="Large"
-            BackgroundColor="#000094"
-            HorizontalOptions="Center"
-            CornerRadius="30"
-            HeightRequest="60"
-            WidthRequest="60"
-            Clicked="CreateBtn"/>
+        <StackLayout VerticalOptions="End">
+            <Button x:Name="_create"
+                Text="+"
+                TextColor="#FFFFFF"
+                FontSize="Large"
+                BackgroundColor="#000094"
+                HorizontalOptions="Center"
+                CornerRadius="30"
+                HeightRequest="60"
+                WidthRequest="60"
+                Clicked="CreateBtn"/>
+            <Button x:Name="_save"
+                    Text="Create"
+                    TextColor="#FFFFFF"
+                    BackgroundColor="#000094"
+                    HorizontalOptions="Center"
+                    CornerRadius="30"
+                    HeightRequest="60"
+                    WidthRequest="60"
+                    IsVisible="false"
+                    Clicked="SaveBtn"/>
+        </StackLayout>
+
         <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
         <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
     </StackLayout>
