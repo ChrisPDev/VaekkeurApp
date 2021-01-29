@@ -57,11 +57,11 @@
                             TextColor="#F3FCFF"
                             PropertyChanged="OnTimePickerPropertyChanged"/>
                 <StackLayout Orientation="Horizontal" Grid.RowSpan="2" Grid.Column="2">
-                    <Switch x:Name="_switch"
+                    <Switch x:Name="ActiveSwitch"
                             OnColor="ForestGreen"
                             ThumbColor="#FFFFFF"
                             HorizontalOptions="EndAndExpand"
-                            Toggled="OnSwitchToggled"/>
+                            Toggled="{Binding IsActive}"/>
                 </StackLayout>
             </Grid>
         </Frame>
