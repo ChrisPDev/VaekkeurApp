@@ -57,6 +57,7 @@ namespace VaekkeurApp
                 CreateAlarm.IsVisible = true;
                 _create.IsVisible = false;
                 _save.IsVisible = true;
+                AlarmList.IsVisible = false;
             }
         }
 
@@ -67,6 +68,7 @@ namespace VaekkeurApp
                 CreateAlarm.IsVisible = false;
                 _create.IsVisible = true;
                 _save.IsVisible = false;
+                AlarmList.IsVisible = true;
             }
         }
 

@@ -4,32 +4,33 @@
              x:Class="VaekkeurApp.MainPage">
     
     <StackLayout Background="#455357">
-        <ListView x:Name="AlarmList" ItemTapped="OnItemTapped">
+        <ListView x:Name="AlarmList" ItemTapped="OnItemTapped" HasUnevenRows="True" Margin="10,10,10,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <StackLayout>
+                        <StackLayout Orientation="Horizontal" Background="#8B9091" Spacing="0">
+                            <StackLayout Spacing="0">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label x:Name="alarmTitle"
-                                       Text="{Binding Title}"
-                                            TextColor="#F3FCFF"/>
+                                    <Label x:Name="alarmTitle" Grid.Row="0"
+                                            Text="{Binding Time}"
+                                           FontSize="48"
+                                            TextColor="#FFFFFF" Padding="10,0,0,0"/>
                                     <Label Grid.Row="1" x:Name="alarmTime"
-                                       Text="{Binding Time}"
-                                            TextColor="#F3FCFF"/>
-                                    <Switch Grid.Row="1" Grid.Column="1" x:Name="_switch"
-                                     OnColor="ForestGreen"
-                                     ThumbColor="#8B9091"
-                                     HorizontalOptions="EndAndExpand"
-                                     Toggled="OnSwitchToggled"/>
+                                            Text="{Binding Title}"
+                                            FontSize="14"
+                                            TextColor="#FFFFFF" Padding="10,0,0,10"/>
+                                    <Switch Grid.RowSpan="2" Grid.Column="2" x:Name="_switch"
+                                             OnColor="ForestGreen"
+                                             ThumbColor="#FFFFFF"
+                                             Toggled="OnSwitchToggled"/>
                                 </Grid>
                             </StackLayout>
                         </StackLayout>
@@ -37,30 +38,33 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Grid x:Name="CreateAlarm" IsVisible="false">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Entry x:Name="_entry"
-             Placeholder="Enter event to be reminded of" TextColor="#F3FCFF"/>
-            <TimePicker Grid.Row="1" x:Name="TodayTime" Time="12:00:00"
+        <Frame CornerRadius="20" Padding="0" x:Name="CreateAlarm" IsVisible="false" Background="#8B9091" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="_entry" 
+                       Placeholder="Enter event to be reminded of" 
+                       TextColor="#F3FCFF"/>
+                    <TimePicker Grid.Row="1" x:Name="TodayTime" 
+                            Time="12:00:00" 
                             Format="T"
                             TextColor="#F3FCFF"
                             PropertyChanged="OnTimePickerPropertyChanged"/>
-            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <Label/>
-                <Switch x:Name="_switch"
-                        OnColor="ForestGreen"
-                        ThumbColor="#8B9091"
-                        HorizontalOptions="EndAndExpand"
-                        Toggled="OnSwitchToggled"/>
-            </StackLayout>
-        </Grid>
+                <StackLayout Orientation="Horizontal" Grid.RowSpan="2" Grid.Column="2">
+                    <Switch x:Name="_switch"
+                            OnColor="ForestGreen"
+                            ThumbColor="#FFFFFF"
+                            HorizontalOptions="EndAndExpand"
+                            Toggled="OnSwitchToggled"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
         <StackLayout VerticalOptions="End">
             <Button x:Name="_create"
                 Text="+"
@@ -73,7 +77,7 @@
                 WidthRequest="60"
                 Clicked="CreateBtn"/>
             <Button x:Name="_save"
-                    Text="Create"
+                    Text="-"
                     TextColor="#FFFFFF"
                     BackgroundColor="#000094"
                     HorizontalOptions="Center"
