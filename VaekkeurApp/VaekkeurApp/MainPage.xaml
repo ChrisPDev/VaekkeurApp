@@ -24,13 +24,12 @@
                                            FontSize="48"
                                             TextColor="#FFFFFF" Padding="10,0,0,0"/>
                                     <Label Grid.Row="1" x:Name="alarmTime"
-                                            Text="{Binding Title}"
+                                            Text="{Binding Name}"
                                             FontSize="14"
                                             TextColor="#FFFFFF" Padding="10,0,0,10"/>
                                     <Switch Grid.RowSpan="2" Grid.Column="2" x:Name="_switch"
                                              OnColor="ForestGreen"
-                                             ThumbColor="#FFFFFF"
-                                             Toggled="OnSwitchToggled"/>
+                                             ThumbColor="#FFFFFF"/>
                                 </Grid>
                             </StackLayout>
                         </StackLayout>
@@ -51,18 +50,10 @@
                 <Entry x:Name="_entry" 
                        Placeholder="Enter event to be reminded of" 
                        TextColor="#F3FCFF"/>
-                    <TimePicker Grid.Row="1" x:Name="TodayTime" 
+                <TimePicker Grid.Row="1" x:Name="TodayTime" 
                             Time="12:00:00" 
                             Format="T"
-                            TextColor="#F3FCFF"
-                            PropertyChanged="OnTimePickerPropertyChanged"/>
-                <StackLayout Orientation="Horizontal" Grid.RowSpan="2" Grid.Column="2">
-                    <Switch x:Name="ActiveSwitch"
-                            OnColor="ForestGreen"
-                            ThumbColor="#FFFFFF"
-                            HorizontalOptions="EndAndExpand"
-                            Toggled="{Binding IsActive}"/>
-                </StackLayout>
+                            TextColor="#F3FCFF"/>
             </Grid>
         </Frame>
         <StackLayout VerticalOptions="End">
