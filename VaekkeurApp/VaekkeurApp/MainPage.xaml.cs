@@ -26,7 +26,6 @@ namespace VaekkeurApp
             InitializeComponent();
             CrossMediaManager.Current.Dispose();
             AlarmList.ItemsSource = Alarms;
-
         }
 
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
