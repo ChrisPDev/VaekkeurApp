@@ -21,7 +21,7 @@
                             <StackLayout Orientation="Horizontal">
                                 <StackLayout>
                                     <Label x:Name="alarmTitle" Text="{Binding Name}" TextColor="#F3FCFF"/>
-                                    <Label Grid.Row="1" x:Name="alarmTime" Text="{Binding TimeOffset}" TextColor="#F3FCFF"/>
+                                    <Label Grid.Row="1" x:Name="alarmTime" Text="{Binding Time}" TextColor="#F3FCFF"/>
                                     <StackLayout>
                                         <Switch Grid.Row="1" Grid.Column="1"
                                      x:Name="ActiveSwitch"
