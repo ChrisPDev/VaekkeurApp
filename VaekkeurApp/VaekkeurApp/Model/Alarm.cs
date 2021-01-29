@@ -4,10 +4,14 @@ using System.Text;
 
 namespace VaekkeurApp.Model
 {
-    class Alarm
+    public class Alarm
     {
-        public string Title { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public DateTime TimeOffset {get; set; }
+
         public string Time { get; set; }
-        public bool Switch { get; set; }
+
+        public bool isActive { get; set; }
     }
 }

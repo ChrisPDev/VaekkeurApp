@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:VaekkeurApp.Model"
              x:Class="VaekkeurApp.MainPage">
-    
+
     <StackLayout Background="#455357">
         <ListView x:Name="AlarmList" ItemTapped="OnItemTapped" HasUnevenRows="True" Margin="10,10,10,0">
             <ListView.ItemTemplate>
@@ -88,8 +88,10 @@
                     Clicked="SaveBtn"/>
         </StackLayout>
 
-        <Entry x:Name="TestEntry" Placeholder="Klokkeslet i sekunder" />
-        <Button x:Name="TestButton" Text="Sæt Alarm" Clicked="TestButton_Clicked" />
+        <Entry x:Name="TestEntry" Placeholder="HH:mm" />
+        <Button x:Name="TestSnooze" Text="Snooze Alarm" Clicked="TestSnooze_Clicked" />
+        <Button x:Name="TestStop" Text="Stop Alarm" Clicked="TestStop_Clicked" />
+        <Button x:Name="TestStart" Text="Sæt Alarm" Clicked="TestStart_Clicked" />
     </StackLayout>
 
 </ContentPage>
