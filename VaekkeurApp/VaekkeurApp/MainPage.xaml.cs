@@ -36,11 +36,18 @@ namespace VaekkeurApp
             ((ListView)sender).SelectedItem = null; // de-select the row
         }
 
+        DateTime morgen = DateTime.Parse("08:00:00 AM");
+        DateTime aften = DateTime.Parse("18:00:00 PM");
+        DateTime Vigtigt = DateTime.Parse("12:00:00 PM");
+
         private void PopulateList()
         {
-            Alarms.Add(new Alarm() { Name = "Morgen", TimeOffset = DateTimeOffset.UtcNow, isActive = false });
-            Alarms.Add(new Alarm() { Name = "Aften", TimeOffset = DateTimeOffset.UtcNow, isActive = false });
-            Alarms.Add(new Alarm() { Name = "Vigtigt Møde", TimeOffset = DateTimeOffset.UtcNow, isActive = false });
+
+
+
+            Alarms.Add(new Alarm() { Name = "Morgen", Time = morgen.ToString("HH:mm"), isActive = false });
+            Alarms.Add(new Alarm() { Name = "Aften", Time = aften.ToString("HH:mm"), isActive = false });
+            Alarms.Add(new Alarm() { Name = "Vigtigt Møde", Time = Vigtigt.ToString("HH:mm"), isActive = false });
         }
         void CreateBtn(object sender, EventArgs args)
         {

@@ -8,7 +8,9 @@ namespace VaekkeurApp.Model
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public DateTimeOffset TimeOffset {get; set; }
+        public DateTime TimeOffset {get; set; }
+
+        public string Time { get; set; }
 
         public bool isActive { get; set; }
     }
