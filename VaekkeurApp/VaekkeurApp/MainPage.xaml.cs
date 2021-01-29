@@ -27,7 +27,6 @@ namespace VaekkeurApp
             InitializeComponent();
             CrossMediaManager.Current.Dispose();
             AlarmList.ItemsSource = Alarms;
-
         }
 
         bool OnTimerTick()
